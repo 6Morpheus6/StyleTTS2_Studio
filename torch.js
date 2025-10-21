@@ -30,14 +30,24 @@ module.exports = {
         "message": "uv pip install torch==2.5.1 torchaudio==2.5.1"
       }
     },
-    // mac
+    // apple mac
     {
-      "when": "{{platform === 'darwin'}}",
+      "when": "{{platform === 'darwin' && arch === 'arm64'}}",
       "method": "shell.run",
       "params": {
         "venv": "{{args && args.venv ? args.venv : null}}",
         "path": "{{args && args.path ? args.path : '.'}}",
-        "message": "uv pip install torch==2.5.1 torchaudio==2.5.1"
+        "message": "uv pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1"
+      }
+    },
+    // intel mac
+    {
+      "when": "{{platform === 'darwin' && arch !== 'arm64'}}",
+      "method": "shell.run",
+      "params": {
+        "venv": "{{args && args.venv ? args.venv : null}}",
+        "path": "{{args && args.path ? args.path : '.'}}",
+        "message": "uv pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2"
       }
     },
     // linux nvidia
